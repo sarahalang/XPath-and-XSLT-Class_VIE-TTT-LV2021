@@ -1,0 +1,285 @@
+
+
+
+
+
+
+
+
+%--------------------------------------------------
+
+\section{Webentwicklung}
+
+
+\begin{frame}[fragile,allowframebreaks]{HTML}
+
+\bg{alert}{white}{HTML = Hyper Text Markup Language}\\
+\bgupper{w3schools}{black}{.html}\\
+Struktur von Webseiten. Ähnliche wie XML, aber fixiertes Set an Tags (viel weniger, die man sich merken muss und oft braucht).
+
+Die wichtigsten HTML-Elemente: 
+html, head, body.
+div, p, h1-6.
+span,
+ul, ol, li.
+table, tr, td.
+%------------------
+\smallskip
+
+\begin{myhtml}{HTML-Grundstruktur}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<style> /* inline CSS, lieber in extra file */
+h1 {
+  color: blue;
+  font-family: verdana;
+  font-size: 300%;
+}
+p  {
+  color: red;
+  font-family: courier;
+  font-size: 160%;
+}
+p.important {
+    color: green;
+}
+</style>
+<script>
+alert("Hello! I am an alert box!!");
+</script>
+</head>
+<body>
+
+<!
+<h1>This is a Heading</h1>
+<p>This is a paragraph. <br />
+<a href="https://www.w3schools.com">This is a link</a>
+</p>
+
+<img src="img.jpg" width="500" height="600" />
+<p style="color:red">I am a paragraph</p>
+
+<p title="I'm a tooltip">
+This is a paragraph.
+</p>
+<p>My mother has <span style="color:blue">blue</span> eyes.</p>
+<p class="important">Note that this is an important paragraph. :)</p>
+
+
+</body>
+</html>
+\end{myhtml}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{CSS}
+\bg{alert}{white}{CSS = Cascading Style Sheets}\\
+\bgupper{w3schools}{black}{.css}\\
+
+wird per Link in HTML eingebunden \sep beschreibt die Darstellung von Webseiten \sep
+Trennung von Inhalt und Darstellung: HTML hat den Inhalt in strukturierter Form, CSS macht das Layout.
+
+Das \bg{w3schools}{white}{\href{http://getbootstrap.com/}{Bootstrap-Framework}} bietet schon viele fertig anzuwendende Elemente. $\to$ Man muss nicht alles von Hand machen, daher sehr empfehlenswert. \sep Box- und Grid-Modell
+
+\href{https://tutorialzine.com/2015/10/learn-the-bootstrap-grid-in-15-minutes}{15min to Bootstrap}
+
+CSS 3 Cheat Sheet
+\href{http://www.smashingmagazine.com/wp-
+content/uploads/images/css3-cheat-sheet/css3-cheat-
+sheet.pdf}{CSS3-Cheatsheet}
+• W3 School
+\href{http://www.w3schools.com/css/}{W3schools CSS} \sep \href{http://www.w3.org/TR/CSS21/propidx.html}{Tabelle der Eigenschaften}
+
+
+\href{http://www.csszengarden.com}{CSS ZenGarden}
+
+\bg{alert}{white}{CSS Syntax}\\
+
+\begin{mycss}{Selektor}
+h1 {
+font-family: Arial
+}
+\end{mycss}
+
+
+\begin{mycss}{Deklarationsblock}
+p {
+font-family: Arial ;
+color: red
+}
+\end{mycss}
+
+\begin{mycss}{Schrift für \texttt{class}}
+.person {
+    font-weight:bold;
+    font-size:smaller;
+    font-style:italic;
+}
+\end{mycss}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Bootstrap-Framework}
+Von diesem \href{https://getbootstrap.com/docs/4.0/getting-started/introduction/}{Link zu Bootstrap} müssen ganz oben im \texttt{<head>} des HTML einerseits das Bootstrap-Stylesheet, andererseits JQuery-Plugins hineingeladen werden.
+(Achtung, \texttt{head} ist hier das Äquivalent zum \texttt{teiHeader}, Überschriften heißen in HTML \texttt{h1-h6}.
+Bei \href{https://getbootstrap.com/docs/4.0/examples/}{Examples} gibt es Beispielseiten, die man als Basis verwenden und anpassen kann.
+\begin{myhtml}{html head (verkürzt)}
+<html>
+    <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://...bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    </head>
+    <body> [...] </body>
+</html>
+\end{myhtml}
+\href{view-source:https://getbootstrap.com/docs/4.0/examples/starter-template/}{Source-Code des Starter Template} (bei normalem Link: Rechtsklick `Element untersuchen').
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{JavaScript}
+\bg{alert}{white}{Dynamische Veränderung von Webseiten}\\
+\bgupper{w3schools}{black}{.js}\\
+JS kann Darstellung in Webseiten verändern, ohne dass man neu laden müsste (daher `dynamisch').
+
+Wenn wir z.B. Dinge per Checkbox wegklicken oder zuschalten wollen, verwenden wir JavaScript.
+
+\begin{myjs}{Hello World}
+document.getElementById("demo").innerHTML = "Hello JavaScript";
+\end{myjs}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Web-Entwicklung-Intro}
+\scriptsize
+\bg{alert}{white}{Ressourcen}
+\href{https://dash.generalassemb.ly/projects}{Lektionen 1 und Beginn von 2 auf Dash (Anmeldung nötig)}. \sep 
+\href{https://www.codecademy.com/learn/learn-html}{Codecademy HTML} (gut, aber eher ausführlich)
+
+
+Interneting is hard:
+\href{https://internetingishard.com/html-and-css/introduction/}{Intro} \sep
+\href{https://internetingishard.com/html-and-css/basic-web-pages/}{Kapitel 2: HTML Basics}
+\sep 
+\href{https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started}{Mozilla Learn HTML} \& \href{https://developer.mozilla.org/de/docs/Learn/HTML}{auf Deutsch}
+\sep
+\href{https://www.w3schools.com/html/exercise.asp}{W3Schools interaktives HTML} oder wahlweise textlastiges \href{https://www.w3schools.com/html/default.asp}{HTML-Tutorial}. \sep
+\href{https://www.learn-html.org/en/Basic_Elements}{Learn HTML.org} \sep
+\href{https://jgthms.com/web-design-in-4-minutes/}{Web Design in 4 minutes (CSS)}
+\smallskip
+
+
+\bg{alert}{white}{Responsive Web Design}
+\href{https://www.w3schools.com/html/html_responsive.asp}{W3Schools-Tutorials}
+
+\end{frame}
+
+
+
+
+\begin{frame}[standout]
+  \alert{Und Action!} \normalsize
+ Wählt aus den Links der letzten Folien ein Tutorial aus und probiert es durch.
+\end{frame}
+
+
+%-----------------------------------------------------
+
+\section{Datenmodellierung}
+\begin{frame}[allowframebreaks]{Datenmodellierung}
+\bg{w3schools}{white}{Model = Abbildung = Repräsenation $\neq$ Original}, sondern nur ausgewählte Teile des Originals werden durch es wiedergegeben bzw. dargestellt. Die Wahl dieser abzubildenden Aspekte der Realität macht die Nützlichkeit oder Repräsentativität für einen bestimmten Anwendungsfall aus.
+
+\bg{w3schools}{white}{Subjektiv \& abstrahiert} $\to$ Muss auf eine spezielle Frage hin erstellt werden und nützt auch nur für diese. Wahrnehmung und Darstellung sind immer selektiv, so auch die Modelle. Ich kann nie alle Aspekte einer Vase gleichzeitig aufnehmen. Ein Foto zeigt sie nur von einer Seite.
+
+\bg{w3schools}{white}{Metadaten} können zur Anreicherung von Datenmodellen gesammelt werden (Zusatz-Informationen über etwas, administrative \& technische).
+
+\bg{w3schools}{white}{Disambiguierung notwendig}, z.B. Normalisierung, Geonames, GND
+
+\bg{w3schools}{white}{Modell = Interpreatation} Alles ab Basiskodierung, bereits teils bei \emph{Named Enitites}. \textbf{Vorschlag zur Kenntlichmachung dieses Umstands:} \texttt{@ana} verwenden.
+
+Wo endet die `Abbilung von Realität', ab wo ist es nur noch eine Perspektive darauf? 
+
+%Konzeptuelles vs. logisches Datenmodell. Entitäten und Relationen (\emph{Entity Relationship Modell} - konzeptuell
+
+\bg{w3schools}{white}{Was ist für uns überhaupt das Original?} Das Buch, dessen Materialität im Digitalen abstrahiert wird? Die Idee?
+
+
+\bg{alert}{white}{Modelle = vereinfachte Repräsentationen von Teilen der realen Welt.}
+
+Bsp. Photogrammetrie / Structure from Motion (= aus Fotos 3D-Modelle erstellen): Realität $\to$ mehr Info als in den Bildern. 3D-Modell: es braucht ca. 8 Bildpixel für 1 Punkt im Modell $\to$ weniger Information als die Summe der (mind. 50) Bilder.
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Wechseln zw. Modellen}
+\bg{w3schools}{white}{Nochmals zu Trennung von Inhalt und Darstellung} Warum nicht gleich in HTML? $\to$ XML zu HTML ist Reduktion, da HTML ein ein viel beschränkteres Modell ist! Daher in den  `abstrakten' Rohdaten den Inhalt genau  darstellen, dann Repärsentationen / Ausgabeformaten / Präsentationsformen in HTML, als PDF etc. automatisch generieren (sog. \emph{single source} Prinzip).
+
+Vom Buch zu unseren digitalen Daten, von den digitalen Daten wieder zum Buch.
+Bei der Konvertierung geht Information eventuell verloren. Z.B. "in Anführungsstrichen", was bedeutet das jetzt? Der Werktitel? Was, wenn er dann kursiv genmacht werden soll? Wenn kein Markup mehr dabei ist, wird es schwerer, das automatisiert zu ändern. Daher auch möglichst keine Darstellunganweisenen (`in quotes') hardcoden (= direkt reinschreiben), sondern lieber in den Basisdaten, z.B. als \texttt{<q>} (\emph{quote}).
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Datenmodellierung}
+
+\bg{alert}{white}{Modellbegriff}
+„Alle Erkenntnis ist Erkenntnis in Modellen oder durch Modelle und jede
+menschliche Weltbegegnung überhaupt bedarf des Mediums Modell“ (Herbert Stachowiak 1973)
+\smallskip
+
+\bg{alert}{white}{Abbildungsmerkmal}
+Ein Modell ist immer ein Abbild von etwas, eine Repräsentation
+natürlicher oder künstlicher Originale.
+\smallskip
+
+\bg{alert}{white}{Verkürzungsmerkmal}
+Ein Modell erfasst nicht alle Attribute des Originals, sondern nur
+diejenigen, die dem Modellschaffenden bzw. der Nutzerin/dem Nutzer
+relevant erscheinen. Ein Modell abstrahiert. Z.B. kann man eine Statue immer nur von einer Seite fotographieren (bzw. sogar sehen! D.h. ich sehe nie `das Ding an sich', sondern einen Ausschnitt aus der Summe aller Eigenschaften, die es ausmachen).
+\smallskip
+
+\bg{alert}{white}{Pragmatisches Merkmal}
+Orientierung am Nützlichen. Ein Modell wird vom Modellschaffenden
+bzw. der Nutzerin/dem Nutzer innerhalb einer bestimmten Zeitspanne
+und zu einem bestimmten Verwendungszweck an Stelle eines Originals
+eingesetzt.
+\smallskip
+
+\bg{alert}{white}{Datenmodellierung}
+Modell =  Ausschnitt aus der realen Welt, allerdings
+werden im Modell nur jene Attribute berücksichtigt, die für
+meine Fragestellung relevant sind.
+ Modell und Realwelt weichen somit voneinander ab.
+\smallskip
+
+\bg{alert}{white}{Modell = Abstraktion (=Klasse)}
+Konkretisierungen (Kochrezepte, Briefe, Gedichte usw.) eines
+Modells werden als Instanzen bezeichnet.
+\smallskip
+
+Standardisierte Modelle ermöglichen die gemeinsame
+Auswertung, datenübergreifende Suche, Datenaustausch\dots
+\smallskip
+
+\bg{alert}{white}{Modelle = vereinfachte Repräsentationen von Teilen der realen Welt.}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{McCarty}
+
+\bg{alert}{white}{Willard McCarty, „Modeling: A Study in words and Meanings“ (2004)}
+\begin{enumerate}
+    \item Ein Modell ist eine Repräsentation von etwas, z.B. für Studienzwecke.
+    \item Modellierung = heuristischer Prozess in dem Modelle kreiert und verwendet werden, um Probleme zu lösen.
+    \item \emph{model of} (beschreibend) vs. \emph{model for} (z.B. Plan zum Hausbau).
+    \item Modellierung als experiementeller Vorgang mit dem Ziel der Welterfassung.
+\end{enumerate}
+\framebreak
+
+\bg{w3schools}{white}{Modellierung als iterativer Prozess} \\
+\begin{itemize}
+    \item Bestehendes Wissen einbringen
+    \item Modell bilden
+    \item Das Modell verwenden um das Thema zu untersuchen
+    \item an den Diskrepanzen zw. Modell und Realität zeigt sich der Verfeinerungsbedarf, da das Modell ja immer nur eine Annährung ist. Diese zeigt aber wieder, wo noch nachgebessert werden muss. 
+    \item mit neuem Wissen aus Modell neu modellieren
+\end{itemize}
+
+\end{frame}
+

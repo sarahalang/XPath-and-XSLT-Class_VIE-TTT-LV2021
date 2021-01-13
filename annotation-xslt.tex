@@ -1,0 +1,435 @@
+
+
+\section{Transformationen mit XSLT}
+
+\begin{frame}[fragile,allowframebreaks]{Was ist XSLT?}
+\bg{alert}{white}{XSL} (\emph{eXtensible Stylesheet Language}) ist eine Programmiersprache zur Transformation von XML-Daten. Diese erlaubt die Speicherung von abstrakten Basisdaten, aus denen dann unterschiedlichste Repräsentationen, z.B. die Strukturinformationen für HTML, automatisch generiert werden können (\emph{single source}-Prinzip).  \textbf{XSLT} (=XSL-Transformations) wird häufig synonym dazu verwendet, ist aber eigentlich nur ein Teil neben \textbf{XSL-FO} (\emph{Formatting Objects}, zur Beschreibung von Druckdokumenten als PDF), das seit 2012 nicht mehr weiterentwickelt wird.
+
+\bg{alert}{white}{XSLT} besteht aus Verarbeitungsmustern (sog. `Schablonen' oder \emph{templates}), wobei das XML-Dokument durchgegangen wird und Schablonen angewendet werden, sobald eine auf den aktuell angefundenen Inhalt passt. Die Verarbeitung durch den Parser beginnt beim Wurzelknoten, weswegen es immer eine erste Schablone gibt, die auf alles passt:
+\begin{verbatim}
+    <xsl:template match="/">...</xsl:template>
+\end{verbatim}
+Wird für angetroffene Inhalte kein Template gefunden, so werden die \emph{Built-in}-Regeln angewendet, die die Inhalte der Elemente (inkl. Unterelemente!) ausgeben. Dies begegnet einem oft in dem Umstand, dass einfach der ganze Dokumenteninhalt drauflosgeprinted wird, was oft nicht eigentlich erwünscht ist. Z.B. möchte man oft ja nur den \texttt{body}-Inhalt eines Dokuments und nicht alle Metainformationen des \texttt{teiHeader}s unsortiert ausgedruckt haben. Dieses grundlegende Verhalten muss man daher bewusst unterbinden. 
+
+\end{frame}
+
+%-----------------------------------------
+\begin{frame}[allowframebreaks]{XSLT-Intro}
+
+\bg{alert}{white}{XSL(T): eXtensible Stylesheet Language (Transformations)}\\
+\bgupper{w3schools}{black}{.xsl}\\
+
+Ein XSLT-Stylesheet (ist selbst ein XML-Dokument und) beschreibt Regeln für den  Transformationsprozess einer Eingabedatei (XML-Dokument) in eine oder
+mehrere Ausgabedateien (XML, XHTML, Text). 
+\smallskip
+
+\bg{alert}{white}{Ausgabeformate sind z.B.\dots}
+\begin{itemize}
+    \item \textbf{(x)HTML} \item \textbf{XML} $\to$ z.B. Word, TEI und andere XML-Standards, RDF, SVG \item \textbf{Text} $\to$ z.B. LaTeX ($\to$ PDF), RTF, MARC.
+\end{itemize}
+
+\alert{Warnung am Rande:} \LaTeX{} z.B. ist auch Markup, hat aber andere geschützte Entitäten, bzw. andere Konventionen, wie man Dinge, wie etwa den Ampersand escaped. \texttt{xsl:output} und nachkontrollieren!
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{XSLT Ressourcen}
+
+\href{https://www.i-d-e.de/?s=referenz}{IDE Kurzreferenzen}
+\sep 
+\href{https://www.w3schools.com/xml/xsl_intro.asp}{W3Schools-Tutorial}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile,allowframebreaks]{Einstieg}
+In Oxygen sowohl ein zu transformierendes XML als auch ein neues XSL-Stylesheet eröffnen.
+
+\begin{myxml}{Auto-generiertes Start-Dokument}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs"
+    version="2.0">
+    
+</xsl:stylesheet>
+\end{myxml}
+\framebreak
+
+Dann in die XML-Datei reinklicken und ein Transformationsszenario konfigurieren (Schraubenzieher-Symbol):
+\begin{enumerate}\footnotesize
+    \item `Neu' auswählen (XSLT-Transformation).
+    \item Reiter XSLT: XML-Datei aussuchen, XSL-Datei aussuchen (kann man sonst auch auf massenweise Dokumente anwenden (Projekt-Optionen).
+    \item Transformator wählen: Saxon (9er Version, sonst egal welcher).
+    \item Reiter XSL-FO: Hier egal, weil das eine andere Transformation als XSLT ist (zum PDFs machen, was alternativ zu \LaTeX{} dort gehen würde).
+    \item Reiter Ausgabedatei: `Datei speichern unter' $\to$ Grünen Pfeil anklicken (\verb|${cfn}| auswählen. Dann \texttt{-transform.xml} hinzufügen, damit die Orignaldatei nicht überschrieben wird. (Bei erneuter Transformation wird diese Datei immer wieder überschrieben, außer man benennt sie um).
+    \item Wahlweise `Im Editor öffnen' und anzeigen als XML, falls XML oder XHTML, falls HTML.
+    \item Ok, dann anwenden.
+\end{enumerate}
+
+Damit wird nun unser, bishe noch sehr leeres, Stylesheet auf die Datei angewendet. \alert{ Was fällt auf? }
+
+Das sich zeigende Verhalten ist das Standard-Verhalten von XSLT, wenn es keine zutreffenden Verarbeitungsregeln findet.
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{Standard-Transformationsablauf}
+\begin{myxml}{Leeres Match-Root-Template}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs"
+    version="2.0">
+       
+    <xsl:template match="/">
+        <!-- und jetzt? -->
+    </xsl:template>
+    
+</xsl:stylesheet>
+\end{myxml}
+Mit dem folgenden äußern wir, dass wir möchten, dass die Standard-Verarbeitungsweise wieder verwendet wird. Der angefundene Text wird ohne Elemente hineingeschrieben. Achtung, das ist jetzt nicht eigentlich ein XML-Dokument, weil es keine Elemente oder hierarchische Struktur hat!
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Standard-Transformationsablauf}
+\begin{myxml}{Standard-Regeln mit \texttt{apply-templates}}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs"
+    version="2.0">
+       
+    <xsl:template match="/">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+</xsl:stylesheet>
+\end{myxml}
+
+\begin{myxml}{Struktur `hardcoden' = händisch reinschreiben}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs"
+    version="2.0">
+       
+    <xsl:template match="/">
+        <xml>
+            <xsl:apply-templates/> 
+        </xml>
+    </xsl:template>
+    
+</xsl:stylesheet>
+\end{myxml}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{XSLT-Standardablauf II}
+Statt die Elementenhierarchie mühsam händisch wieder reinschreiben zu müssen, können wir auch Templates (`Schablonen') definieren, die immer aktiv werden, wenn ein bestimmtes Element gefunden wird. Lies: Wann immer Du \texttt{<p/>} findest, mach XY.
+Wir deklarieren vorher noch einen Namespace (\texttt{xmlns}), damit unsere TEI-Dateien erkannt werden:
+\begin{verbatim}
+    xmlns:t="http://www.tei-c.org/ns/1.0"
+\end{verbatim}
+Elemente müssen jetzt immer mit \texttt{t:} davor angesprochen. \texttt{t:p} lies: \texttt{<p>} aus dem Namespace, der mit \texttt{t:} abgekürzt ist (siehe Stylesheet-Deklaration oben).
+\begin{myxml}{\texttt{p}-Elemente matchen}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:t="http://www.tei-c.org/ns/1.0"
+    exclude-result-prefixes="xs"
+    version="2.0">
+       
+    <xsl:template match="/">
+        <xml>
+            <xsl:apply-templates/> 
+        </xml>
+    </xsl:template>
+    
+    <xsl:template match="t:p">
+        <neu>
+            <xsl:apply-templates/>
+        </neu>
+    </xsl:template>
+    
+</xsl:stylesheet>
+\end{myxml}
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{XSLT-Basics III}
+Alle \texttt{p}s, inklusive ihrem Inhalt (dank \texttt{apply-templates}) werden erhalten, aber sie heißen nun statt \texttt{<p> <neu>} (sinnfrei \& zu Demonstrationszwecken).
+Dieses Vorgehen jedenfalls nennt sich das sogenannte \bg{alert}{white}{Push-Paradigma}.
+
+
+Das Gegenstück dazu, das \bg{alert}{white}{Pull-Paradigma} sehen wir jetzt beim hinzugefügten \texttt{<head>}. In dieses neu erzeugte Element holen wir uns bewusst den Inhalt vom \texttt{<title>}-Element rein (Achtung, hier XPath-Wissen anwenden: Wenn es mehrere \texttt{<title>}-Elemente gibt, nimmt er \emph{alle}. Im Zweifelsfall explizit und mist absoluten Pfaden arbeiten. Außerdem ist \texttt{value-of select=""} nicht dasselbe wie \texttt{apply-templates}. \texttt{apply-templates} schaut erst, ob es (weiter \emph{unten} im Code!) noch Regeln gibt, die auf die Elemente zutreffen, die im gefundenen Ding eingeschachtelt sind und wendet ggf. diese an. \texttt{value-of select=""} kopiert nur den aktuell angesprochenen Textinhalt; tiefere Verschachtelungen gehen verloren. \texttt{value-of select="."} gibt den aktuellen Knoteninhalt (Text). \verb|attribut={@rend}| ist eine Kurzschreibweise dafür bei Attributen.
+\begin{myxml}{}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:t="http://www.tei-c.org/ns/1.0"
+    exclude-result-prefixes="xs"
+    version="2.0">
+       
+    <xsl:template match="/">
+        <xml>
+            <head><xsl:value-of select="//t:title"/></head>
+            <xsl:apply-templates/> 
+        </xml>
+    </xsl:template>
+    
+    <xsl:template match="t:p">
+        <neu attribut={@rend}>
+            <xsl:apply-templates/>
+        </neu>
+    </xsl:template>
+    
+</xsl:stylesheet>
+\end{myxml}
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Inhalte löschen}
+Per Automatismus werden in XSLT alle Inhalte (Werte) erhalten -- aber wir haben schon gesehen, dass man mit leeren Regeln bewusst löschen kann. Wir löschen im Beispiel also probehalber alle \texttt{<hi>} (inklusive Inhalt!). Hier darauf achten, dass man nicht versehentlich auf die Quelldatei schreibt, sonst ist alles weg (siehe Transformationsszenario konfigurieren).
+
+\begin{myxml}{Bewusstes Löschen durch leere Regel}
+    <xsl:template match="t:hi">
+        <!-- loeschen -->
+    </xsl:template>
+\end{myxml}
+\framebreak
+
+Das sind im Grunde schon alle Regeln, die man wissen muss. Daneben gibt es natürlich noch mehr Funktionen, falls man kompliziertere Sachen machen will. Diese finden sich im Folgenden erklärt, werden aber evtl. gar nicht gebraucht.
+\medskip
+
+Folgend noch ein Beispiel\dots 
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Beispiel}
+\begin{myxml}{Gedicht $\to$ HTML-Webansicht}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+    
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title><xsl:value-of select="div/head" /></title>
+            </head>
+            <body>
+                <xsl:apply-templates select="div" />
+            </body>
+        </html>
+    </xsl:template>
+    
+    <xsl:template match="div">
+        <h1><xsl:value-of select="head" /></h1>
+        <div>
+            <xsl:apply-templates select="lg" />
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="lg">
+        <p><xsl:apply-templates /></p>    
+    </xsl:template>
+    
+    <xsl:template match="l">
+        <xsl:value-of select="." />
+        <br />
+    </xsl:template>
+</xsl:stylesheet>
+\end{myxml}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Weitere Funktionen}
+\bg{alert}{white}{Variablen}
+\begin{verbatim}
+    <xsl:variable name="platzhalter" select="inhalt">
+\end{verbatim}
+XSLT führt bei Variablen einen sog. \emph{pass by value}, nicht \emph{by reference} aus, d.h. es wird nur der Wert übergeben, den das ausgewählte Element zu einem Zeitpunkt hat. Wenn ich die Variable zu früh setze, wähle ich dabei womöglich einen fixierten Wert. Also am besten immer so nah wie möglich am `Ziel'. 
+\smallskip
+
+\framebreak
+
+\bg{alert}{white}{Attribute}
+\texttt{<xsl:attribute>} dient zum Setzen von Attributen im Resultat-Dokument. Dies ist nicht nötig, wenn man nur einen Inhalt will, dann kann auch die Kurzschreibweise verwendet werden.
+\smallskip
+
+\bg{alert}{white}{\emph{plain text}}
+\texttt{<xsl:text>} setzt Text `as is', d.h. fügt nicht unerwünschte Leerzeichen ein, was sonst passieren. Überhaupt geht XSLT mit Whitespace relativ frei um, außer man verbietet es explizt (\texttt{preserve-space}.
+\smallskip
+
+\bg{alert}{white}{Sortieren}
+Es gibt auch \texttt{<xsl:sort>} zum Sortieren.
+\smallskip
+
+\bg{alert}{white}{Bedingungen}
+\texttt{<xsl:choose>} zum Auswählen unterschiedlicher Verarbeitung je nachdem, was angefunden wird.
+\texttt{<xsl:if>} führt Anweisungen nur aus, wenn eine Bedingung erfüllt ist (z.B. falls es Element XY gibt, oder ein Element Inhalt XY hat).
+
+
+\framebreak
+
+\begin{myxml}{Personenliste in HTML mit \texttt{for-each}}
+<ul> <!-- ungeordnete Liste in HTML -->
+<xsl:for-each select="t:persName">
+    <li> <!-- Listenelement -->
+    <xsl:value-of select="." />
+    </li>
+</xsl:for-each>
+</ul>
+\end{myxml}
+
+\begin{myxml}{Attribute setzen}
+<xsl:for-each select="t:persName">
+    <span class={@rend}><xsl:value-of select="."></span>
+</xsl:for-each>
+<!-- ODER -->
+
+<span>
+    <xsl:attribute name="id">
+        <xsl:value-of select="@rend"><xsl:text>-person</xsl:text>
+    <xsl:attribute>
+    <xsl:attribute name="interpretation">
+        <xsl:value-of select="concat(@rend,@ana)">
+    <xsl:attribute>
+    <xsl:apply-templates /> <!-- für den eig. Inhalt -->
+<span>
+<!-- Resultat z.B. 
+    <span id="monster-person" interpretation="monster-boese">
+    Weird Sisters </span> -->
+\end{myxml}
+
+\begin{myxml}{For-each-group}
+
+<!-- könnte man auch nach Alphabet sortieren oder so. Nur gezielt verwenden, macht in komplexen Dokumenten oft ominöse Fehler. -->
+
+<xsl:for-each-group select"dings" group-starting-with="dings[@rend="Startdings]]"
+    <xsl:apply-templates select="current-group()">
+    <xsl:value-of select="current()/dingens">
+</xsl:for-each-group>
+
+\end{myxml}
+
+\begin{myxml}{Mehrere Quelldokumente zusammenführen (\texttt{document()})}
+<xsl:apply-templates select="document('Letter1_TEI.xml')/tei:TEI/tei:text/tei:body/tei:div"/>
+\end{myxml}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{\emph{flow control} / Bedingungen}
+
+
+Beispiel: Wähle jede Person (\texttt{//persName}) und generiere eine Aufzählung (\texttt{<ul>}) der Nachnamen (\texttt{lastname}):
+\begin{myxml}{Schleifen: for-each}
+<ul>
+<xsl:for-each select="//persName">
+    <xsl:sort select="lastname" order="ascending" />
+    <li> <xsl:value-of select="lastname"/> </li>
+</xsl:for-each>
+</ul>
+\end{myxml}
+
+
+\texttt{xsl:if} führt Anweisungen nur aus, wenn die Bedingung in \texttt{@test} erfüllt ist.
+\begin{myxml}{Bedingungen I: Falls}
+<xsl:if test=" xpath-ausdruck "> ... </xsl:if>
+
+<xsl:for-each select="//book">
+    <xsl:if test=" author = 'Cicero' ">
+        <li><xsl:value-of select="title"/></li>
+    </xsl:if>
+</xsl:for-each>
+\end{myxml}
+
+Auch die Unterscheidung mehrerer Fälle ist möglich. So kann ich z.B. für das HTML unterschiedlichen Personen unterschiedliche Farben zuweisen. Dazu frage ich, in \texttt{@test} welche ID ein angetroffener \texttt{persName} hat und verarbeite dann je nachdem unterschiedlich.
+\begin{myxml}{Bedingungen II: Auswählen}
+<xsl:choose>
+    <xsl:when test=" xpath-ausdruck "> ... </xsl:when>
+    <xsl:otherwise> ... </xsl:otherwise>
+</xsl:choose>
+\end{myxml}
+
+Man kann zudem sortieren (\texttt{xsl:sort}), kopieren (\texttt{xsl:copy - xsl:copy-of})und Variablen verwenden. 
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{XSL-Paradigmen: Push}
+\begin{myxml}{Push-Paradigma}
+<xsl:apply-templates select="xpath-ausdruck"/>
+\end{myxml}
+Geeignet vor allem: Für das Verarbeiten des Text-Bodys. Hier werden angetroffene Dinge einfach verarbeitet, wann immer sie auftreten. Man muss deren Reihenfolge nicht kennen. Die Dokumentenstruktur des `Herkunftsdokuments' wird weitgehend erhalten (soweit es eben in den Template-Regeln definiert ist).
+
+\begin{myxml}{Push-Paradigma}
+<xsl:template match="/">
+    <xsl:apply-templates/>
+</xsl:template>
+\end{myxml}
+
+\bg{alert}{white}{Push Processing}
+Jedes Element bekommt eine Regel oder \emph{built-ins} werden verwendet. Nützlich falls Input- und Outputdokument dieselbe Struktur haben sollen. 
+
+
+\begin{myxml}{Call Template / Push-Methode}
+<xsl:template match="/">
+    <xsl:call-template name="irgendein-name ">
+</xsl:template>
+<xsl:template name="irgendein-name">
+    ... macht etwas ...
+</xsl:template>
+\end{myxml}
+
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{XSL-Paradigmen: Pull}
+
+\begin{myxml}{Pull-Paradigma}
+<xsl:call-templates name="name-eines-templates "/>
+\end{myxml}
+Geeignet vor allem: Herausziehen von Metadaten aus dem \texttt{teiHeader}, um sie irgendwo extra anzuzeigen.
+Nochmals `über das Dokument drübergehen' und z.B. einen Personenindex machen, den man an einer bestimmten Stelle hingesetzt haben will (\texttt{<xsl:for-each>} ist z.B. ein typischer Befehl der Push-Methode.
+
+\framebreak
+
+\bg{alert}{white}{Pull Processing}
+Gewisse Knoten explizit auswählen. Kontrolle darüber, nur bestimmte Knoten im Output-Dokument weiterzuverwenden.
+Gut geeignet, falls das Output-Dokument eine völlig andere Struktur haben soll, als der Inhalt oder nur sehr selektiv Inhalte übernommen werden sollen (z.B. nur eine Liste aller enthaltenen Personennamen braucht nicht den ganzen restlichen Text dazu verarbeiten).
+
+\begin{myxml}{Pull-Paradigma}
+<xsl:value-of select=’’pattern’’/>
+<xsl:apply-templates select=’’pattern’’/>
+<xsl:for-each select=’’pattern’’/>
+\end{myxml}
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Paradigmen in der Praxis}
+In der Praxis wird meist eine Kombination von beiden verwendet: Die Metadaten des \texttt{teiHeader} werden, z.B. in der Form eines Zitiervorschlags, mit dem Pull-Paradigma ausgelesen. Dann geht man an die Stelle des Output-Dokuments, wo der hauptsächliche Inhalt (\emph{body}) hin soll und wählt aus, dass gar nicht mehr das ganze Dokument automatisch per Pull-Paradigma verarbeitet werden soll, sondern nur alles ab dem \texttt{body}.
+\begin{myxml}{apply-templates select}
+<xsl:apply templates select="//t:body" />
+<xsl:apply-templates select="head" mode="toc"/>
+\end{myxml}
+
+\alert{Anderes Beispiel:} Kapitelüberschriften innerhalb des Buches per Push-Paradigma, für das Inhaltsverzeichnis im Pull-Paradigma. Mithilfe von \texttt{mode}s kann man zudem noch unterscheiden, dass in gewissen Situationen andere Templateregeln angewandt werden. 
+
+\verb|<xsl:template match="">| verarbeitet ein Element, wo immer es angetroffen wird.
+
+\verb|<xsl:value-of select="">| gibt den Inhalt eines Elements als String aus -- wenn noch Kindelemente sind, gehen die Knoten/Auszeichnungen verloren, weil nur mehr plain text kopiert wird.
+
+\texttt{<xsl:apply-templates>} geht die Regeln durch, wo er dann alles findet, was unter \texttt{"match"} definiert ist  -- er sucht aber Unter-Verschachtelungen nur weiter, wenn man das explizit so angibt (mit weiterem \texttt{apply-templates}).
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Facts}
+%\bg{alert}{white}{XSLT als Sprache} ist deklarativ (wie CSS nur mächtiger) und dynamically-typed, d.h. es arbeitet eher mit Werten als mit Variablen (wie JavaScript).
+
+
+\bg{alert}{white}{Vorgehen bei Stylesheets}
+Regelwerk nach Top-down-Prinzip, ausgehend vom
+Wurzelelement des Quelldokuments.
+
+\bg{alert}{white}{Wurzelelement \texttt{xsl:stylesheet}}
+XSLT ist selbst XML, daher hat es auch ein alles umgebendes Wurzelelement. Hier werden einige Dinge deklariert (Namensräume, XSLT-Processor, etc.).
+
+\end{frame}
+

@@ -1,0 +1,810 @@
+
+
+\section{Was ist Annotation?}
+\begin{frame}[fragile,allowframebreaks]{Annotation und Erschließung}
+
+\bg{alert}{white}{= Annotation mit dem Ziel der Erschließung}\\
+irgendwelche oder alle (?) (Meta-)Daten sammeln vs. gezielt spezifische Daten verfügbarmachen \\
+
+\bg{w3schools}{white}{Was ist Annotation?}\\
+Zusatzinfo \sep Metadaten \sep Bedeutung kodieren \sep 
+Strukturmerkmale, Wissen und Erkenntnisse (implizite Strukturen) für die Maschine explizit machen für Verarbeitung und Nachnutzung. 
+
+\textbf{Im Druckwesen:} inhaltliche Korrektur und typographische Anweisungen (Druckvorbereitung) \sep
+\textbf{Computer:} Einbettung von Markup in elektronische Dokumente (log. Struktur beschreiben) \\
+
+\bg{w3schools}{white}{Visual vs. Generic Markup} = Text mit Auszeichnung (Aussage über Bedeutung: Semantik, Struktur, Beziehungen -- William W. Tunnicliffe (1967) \\
+
+\bg{w3schools}{white}{Visual} = presentational \& procedural \\
+\bg{w3schools}{white}{Generic} deskriptiv 
+\begin{verbatim}
+<name type="person">J. W. v. Goethe</name>
+\end{verbatim}
+$\to$ explizite Marker zur Unterscheidung für die Weiterverarbeitung
+\smallskip
+
+Bennenen, charakterisieren, annotieren (auf formalisierte Art und Weise)
+\smallskip
+
+\bg{w3schools}{white}{Markup = Annotation = Kodierung }
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{Stufen der Annotation}
+
+\bg{alert}{white}{Basisannotation}
+Formale Kriterien der Textgestalt, z.B. Überschriften, Paragraphen. Hinzufügen von Metadaten (bibliographisch, z.B.).
+
+\bg{alert}{white}{Tiefenerschließung}
+Übergang formal-inhaltlich:
+Personen, Orte, \emph{Named Entities}, GND -- Zurückgreifen auf Standards und Normdateien zur Vernetzung vieler Projekte.
+
+\bg{alert}{white}{Übergeordnete Forschungsfrage}
+Redeanteile der Monster? Wie wird charakterisiert? Kann man Spannung / Grusel `messen'? Gibt es Signalwörter? Visualisierung der Ergebnisse
+
+\end{frame}
+
+%-----------------------------------------------------
+\begin{frame}[allowframebreaks]{Markup / Annotation}
+\bg{alert}{white}{Annotation = `Auszeichnung' = Mark-up}\\
+
+\begin{quote}
+Eine Auszeichnungssprache (\emph{markup language}, abgekürzt ML) ist eine maschinenlesbare Sprache für die Gliederung und Formatierung von Texten und anderen Daten. Der bekannteste Vertreter ist die \emph{Hypertext Markup Language} (HTML), die Kernsprache des World Wide Webs.
+
+Mit Auszeichnungssprachen werden Eigenschaften, Zugehörigkeiten und Darstellungsformen von Abschnitten eines Textes (Zeichen, Wörtern, Absätzen usw. -- ``Elementen'') oder einer Datenmenge beschrieben. Dies geschieht in der Regel, indem sie mit \emph{Tags} markiert werden.\punkti mit der \emph{Standard Generalized Markup Language} (SGML) empfohlene ``Trennung von Struktur und Darstellung''. (\href{https://de.wikipedia.org/wiki/Auszeichnungssprache}{Wikipedia})
+\end{quote}
+
+\bg{alert}{white}{maschinenlesbare `Auszeichnung'}\\
+\bg{w3schools}{white}{SMGL}~ \bg{w3schools}{white}{HTML}~ \bg{w3schools}{white}{XML}~ \bg{w3schools}{white}{\dots} \\
+\bg{alert}{white}{darstellend vs. beschreibend / semantisch:} \\
+
+
+\begin{itemize}
+    \item z.B. `Schriftgröße 14' vs. `Überschrift' (=Typus). (explizit vs. implizit)
+    \item Textformatierung vs. Textbedeutung
+    \item procedural, representative, descriptive / conceptual (sematisch)
+    \item WYSIWYG-Textverarbeitung  vs. WYSIWYM
+    \item Vorteil, z.B. bei langen Dokumenten: Aussehen des Elements 1x umdefinieren
+    \item verschiedene Repräsentationen eines Dokuments: beschreibend, dargestellt 
+    \item Webbrowser `rendern' HTML: in 2 Sichten verfügbar (als Text und dargestellt)
+\end{itemize}
+\end{frame}
+ 
+ \begin{frame}[allowframebreaks]{Praktische Tipps}
+ Tools zum `Switchen' zwischen Markups/Markdown: 
+ z.B.~ \href{https://pandoc.org/}{Pandoc} oder \href{http://oxgarage.tei-c.org/#}{OxGarage} (TEI-Fokus). \\
+ \footnotesize
+ Download-Möglichkeiten überprüfen -- evtl. gibt es das gewünschte Dokument bereits in Basis-Annotation? Hier allerdings potentiellen Korrektur-Aufwand berücksichtigen -- falls Anpassungsbedarf: oft ist man mit einer .txt-Datei von Hand schneller. (Download oder per XSL `herstellen')
+ 
+
+
+Binäre Dokumentenformate  wie \emph{.doc, .pdf, .dvi} (\TeX{}-Ausgabeformat) $\neq$ Auszeichnungssprachen.
+
+Ziel: \textbf{Implizites explizieren}.
+\end{frame}
+
+
+%-------------------------------
+
+
+\section{Annotation im Alltag}
+%---------------------------------------------
+\begin{frame}[allowframebreaks]{\href{https://de.wikipedia.org/wiki/Standard_Generalized_Markup_Language}{SGML}}
+\bg{alert}{white}{Trennung von Inhalt und Darstellung}\\
+\bg{alert}{white}{Wie XML: Metasprache} ~
+HTML und XML (Nachfolger von SGML genannt $\to$  SGML-basierend) \sep Metasprache zur Definition von Auszeichnungssprachen für Dokumente \sep \emph{Genormte Verallgemeinerte Auszeichnungssprache} (en: \textbf{Standard Generalized Markup Language}
+
+\bgupper{w3schools}{black}{.sgml}\\
+\end{frame}
+
+
+
+
+
+%-----------------------------------------------------
+\begin{frame}[fragile,allowframebreaks]{\href{https://de.wikipedia.org/wiki/Rich_Text_Format}{RTF}}
+\bg{alert}{white}{Rich Text Format}~
+Microsoft 1987 \sep Austauschformat zwischen Textverarbeitungsprogrammen (versch. Hersteller und Betriebssysteme). \sep enthält im Gegensatz zu `plain text' Markup zur Textformatierung\\
+
+\bgupper{w3schools}{black}{.rtf}\\
+\footnotesize
+\begin{verbatim}
+{\rtf1
+Guten Tag!
+\line
+{\i Dies} ist \b{\i ein
+\i0 formatierter \b0Text}.
+\par
+\b Das \b0Ende.
+} 
+\end{verbatim}\normalsize
+
+\end{frame}
+
+%-----------------------------------------------------
+\begin{frame}[fragile,allowframebreaks]{\href{https://de.wikipedia.org/wiki/JavaScript_Object_Notation}{JSON}}
+
+\bg{alert}{white}{JavaScript Object Notation}\\
+\bgupper{w3schools}{black}{.json}\\
+ausgesprochen wie `Jason' \sep kompaktes Datenformat \sep lesbar \sep key-value-Paare \sep Verschachtelung \\
+
+\bg{alert}{white}{Alternative zu XML? Unterschiede}\\
+XML = Struktur-beschreibend, JSON = Syntax-Konvention (nicht deklarativ) \sep JSON: Definition von Instanzen strukturierter Daten \sep JSON = sehr flexibel \sep `lightweight': geriner Overhead, für wenige Daten in strikter Key-Value-Struktur lesbarer \sep valides JavaScript, per \verb|eval()|-Funktion direkt als JS-Objekt umsetzbar
+
+\bg{alert}{white}{Fazit}~ JSON im Vorteil, wo simple key-value-Paare (\textbf{`Einfachheit'}). XML hat und erlaubt mehr \textbf{Komplexität}.
+\bg{w3schools}{white}{XML = Auszeichnungssprache}~\\
+\bg{w3schools}{white}{JSON = Datenaustauschformat}~
+
+\footnotesize
+\begin{verbatim}
+{
+  "Herausgeber": "Xema",
+  "Nummer": "1234-5678-9012-3456",
+  "Inhaber":
+  {
+    "Name": "Mustermann",
+    "Vorname": "Max",
+    "maennlich": true,
+    "Hobbys": ["Reiten", "Golfen", "Lesen"],
+    "Alter": 42,
+    "Kinder": [],
+    "Partner": null
+  }
+}
+\end{verbatim}\normalsize
+\end{frame}
+
+
+%-------------------------------
+\begin{frame}[fragile,allowframebreaks]{\LaTeX}
+\bg{w3schools}{white}{.tex} Textsatz mit \TeX{} durch Lamport-Makros (= `Shortcuts) \sep
+\LaTeX{} liest Makros (mit sprechenden Namen) ein -- in der `Produktion' entsteht die `Illusion' rein deskriptiver Auszeichnung, im Hintergrund sind dies allerdings nur Stellvertreter für die komplexe prozedurale Sprache \TeX . \sep 
+prozedural vs. präsentational: \textbf{WYIWYG} (\emph{what you see is what you get}, z.B. Word) vs. \textbf{WYSIWYM} (\emph{what you see is what you mean}) \LaTeX{}-Editoren) \\
+
+
+\footnotesize
+Befehle unten ohne spaces vor der Klammer \\
+\mycommand{\textit{Italic}}{\textit{Italic} (darst.)}
+\mycommand{\emph{Italic}}{\textit{Italic} (beschr. / semant.)}
+\mycommand{\textbf{Bold}}{\textbf{Bold}}
+\mycommand{\section{Titel}}{Überschrift 1}
+\mycommand{\subsection{Titel}}{usw.}
+\mycommand{\href{http://a.com}{Link}}{\href{https://www.latex-project.org/latex3/}{`hidden' Link}}
+\mycommand{\includegraphics{bla.png}}{Bild}
+
+\end{frame}
+
+\begin{frame}[standout]
+  Übung: Testdokument erstellen auf \alert{\href{https://www.overleaf.com/}{\faCode Overleaf}}
+\end{frame}
+
+
+
+%-----------------------------------------------------
+\begin{frame}[fragile,allowframebreaks]{\href{https://commonmark.org/help}{Markdown}}
+\includegraphics[width=0.25\textwidth]{md.png}
+\href{https://commonmark.org/help}{Markdown in 60s} \sep simple text formatting ~
+\bg{alert}{white}{.md // darstellend}\\
+
+\footnotesize
+\mycommand{*Italic*}{\textit{Italic}}
+\mycommand{**Bold**}{\textbf{Bold}}
+\mycommand{# Heading 1}{Überschrift 1}
+\mycommand{## Heading 2}{usw.}
+\mycommand{[Link]{http://a.com}}{`versteckter' Link}
+\mycommand{![Image][http://url/a.png}{Bild}
+\mycommand{> Blockquote}{Zitat}
+\mycommand{- List}{Liste (schachtelbar, 2 spaces)}
+\mycommand{* List}{Alternative}
+\mycommand{1. Aufzaehlung}{Aufzählung}
+\mycommand{---}{Trennlinie}
+\mycommand{`Inline code`}{Code (`backticks`)}
+\mycommand{```code block```}{Codeblock}
+\normalsize
+\end{frame}
+
+\begin{frame}[standout]
+  Übung: \alert{\href{https://commonmark.org/help}{Markdown in 60s}} oder 10min Übung
+\end{frame}
+
+
+
+
+\begin{frame}[fragile,allowframebreaks]{\href{https://de.wikipedia.org/wiki/PostScript}{PostScript}}
+Seitenbeschreibungssprache \sep 1980er (Adobe Systems) \sep Vektorgraphikformat für Drucker \sep aber auch: Turing-vollständige, stackorientierte Programmiersprache \sep Standard der Druckindustrie \sep heute von PDF (\emph{Portable Dokument Format}) größtenteils abgelöst (ebenfalls Adobe, Weiterentwicklung von PS) \sep kann per PostScript-Druckertreiber aus allen möglichen Dokumenten erstellt werden \sep in Unix per `Ghostscript' verarbeitet \sep Beschreibung von Dokumenten als skalierbare Vektorgraphiken: verlustfreie Vergrößerung 
+~\bg{alert}{white}{.ps // präsentational}\\[0.2em]
+\footnotesize
+Beispielprogramm schreibt `Hallo Welt!' an Postition 50,50. Per Default Koordinatensystem beginnend links unten.
+\begin{verbatim}
+%!
+/Courier findfont    % Schriftart
+20 scalefont         % Schriftgröße 20 
+setfont              % festlegen
+50 50 moveto         % (50, 50)=Schreibposition
+(Hallo Welt!) show   % Text ausgeben
+showpage             % Seite ausgeben
+\end{verbatim}
+\normalsize
+
+\end{frame}
+
+
+\section{Annotation mit XML}
+%-----------------------------------------------------
+\begin{frame}[allowframebreaks]{XML: eXtensible Markup Language}
+\href{https://www.w3schools.com/xml/default.asp}{W3Schools-Tutorial} \\
+\bg{alert}{white}{Paradigma der Trennung von Form \& Inhalt} ~
+\bg{alert}{white}{XML: Metasprache}\\
+\bgupper{w3schools}{black}{.xml}\\
+\bg{w3schools}{white}{RSS}~\bg{w3schools}{white}{MathML}~
+\bg{w3schools}{white}{GraphML}~\bg{w3schools}{white}{XHTML}~\\
+\bg{w3schools}{white}{XAML}~\bg{w3schools}{white}{SOAP}~\bg{w3schools}{white}{RDF}~
+\bg{w3schools}{white}{KML}~\bg{w3schools}{white}{OSM}~\\
+\bg{w3schools}{white}{Scalable Vector Graphics (SVG)}~(z.B.)
+
+\begin{quote}
+    Die \textbf{Extensible Markup Language} (dt. \emph{Erweiterbare Auszeichnungssprache}), abgekürzt XML, ist eine Auszeichnungssprache zur Darstellung hierarchisch strukturierter Daten im Format einer Textdatei, die sowohl von Menschen als auch von Maschinen lesbar ist.
+
+XML wird auch für den plattform- und implementationsunabhängigen Austausch von Daten zwischen Computersystemen eingesetzt, insbesondere über das Internet, und wurde vom World Wide Web Consortium (W3C) am 10. Februar 1998 veröffentlicht. \punkti \textbf{XML ist eine Metasprache,} auf deren Basis durch strukturelle und inhaltliche Einschränkungen anwendungsspezifische Sprachen definiert werden. Diese Einschränkungen werden entweder durch eine \textbf{Document Type Description (DTD)} oder durch ein \textbf{XML Schema} ausgedrückt.  (\href{https://de.wikipedia.org/wiki/Extensible_Markup_Language}{Wiki})
+\end{quote}
+\end{frame}
+
+%-----------------
+\begin{frame}[allowframebreaks]{XML-Familie}
+\footnotesize
+\bg{w3schools}{white}{XML}~strukturierte Datenbeschreibung \\
+\bg{w3schools}{white}{XPath}~Navigation in XMLs \\
+\bg{w3schools}{white}{XML Schema}~striktes Datenmodell \\
+\bg{w3schools}{white}{XSL}~eXtensible Style Language \\
+\bg{w3schools}{white}{XSLT}~Transformation von XML-Dokumenten  \\
+\bg{w3schools}{white}{XSL-FO}~ formatierte Ausgabe (z.B. für Druck) \\
+\bg{w3schools}{white}{XQuery}~XML-Datenbank-Abfragesprache \\
+\bg{w3schools}{white}{und mehr}~
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]{XML-Vokabularien}
+\footnotesize
+\textbf{(X)HTML} Hypertext Markup Language \sep \textbf{EAD} Encoded Archival Description \sep \textbf{TEI} Text Encoding Initiative \sep \textbf{CEI} Charters Encoding Initiative \sep \textbf{MEI} Music Encoding Initiative \sep \textbf{SVG} Scalable Vector Graphics \sep \textbf{MathML} \sep \textbf{CML} Chemical Markup Language, \dots
+\end{frame}
+
+%-----------------------------------------------------
+\begin{frame}[allowframebreaks]{XML: eXtensible Markup Language}
+\footnotesize
+deskriptiv $\neq$ prozedural \sep erweiterbar (nicht wie bei HTML): kein fixiertes Tag-Set \sep 
+UTF-8 kodiert
+
+~\bg{alert}{white}{Bedeutung der Daten > Darstellung}\\
+
+expliziert Implizites oder eine Interpretation \sep Hinzufügen von (Meta-)Information \sep maschinelle Weiterverarbeitung 
+\sep Standard für Beschreibung und Austausch von Daten ~\bg{alert}{white}{universelle Metasprache}\\
+
+
+\bg{w3schools}{white}{Nachteile}~  `geschwätzig', Overlapping-Problem, langsam verglichen mit JSON und relationalen Datenbanken -- hat aber auch Features, die die nicht haben (\& für GeWi sehr wichtig sind)
+
+\bg{w3schools}{white}{menschen- und maschinenlesbar}~ 
+
+\bg{w3schools}{white}{unabhängig von Ausgabeformat}~ (Papier, Bildschirm)
+
+\end{frame}
+
+%----------------------------------
+
+
+\begin{frame}[fragile,allowframebreaks]{XML-Regeln}
+\footnotesize
+\bg{w3schools}{white}{Prolog}~ \\
+\mycommand{<xml version="1.0" encoding="utf-8">}{XML-Deklaration}
+\mycommand{<?xsl-stylesheet type="text/xsl" href="mein.xsl"?>}{Verarbeitungsanweisungen (optional)}
+
+evtl. Einbindung des Dokumentmodells (optional) \\
+DTD, XML Schema, RelaxNG, Schematron \\
+\smallskip
+
+\bg{w3schools}{white}{Entitäten}~ `geschützte Zeichen', da sie eine Bedeutung in der Metasprache und der Objektsprache haben; selbstdefiniert \& vordefinierte, z.B.: \\
+\mycommand{&lt;}{<}
+\mycommand{&gt;}{>}
+\mycommand{&amp;}{\&}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{XML-Regeln}
+\footnotesize
+Prüfung auf \textbf{Wohlgeformtheit} (nach Regeln des XML-Standards) und \textbf{Validität / Gültigkeit} (wohlgeformt \& Schema-Grammatik entsprechend): kann nur geparst werden, wenn wohlgeformt. Schema kann im Notfall ignoriert werden, auch wenn der Validator sich beschwert.
+
+Es gibt Regeln für Elementnamen. Sollen hier nicht im Detail erklärt werden -- Im Zweifelsfall wird man bei der Validierung erfahren, ob man sich einen Fehltritt geleistet hat.
+
+\includegraphics[width=0.1\textwidth]{doppelkeks.jpg}~\bg{alert}{white}{Doppelkeks} ~ ~\bg{alert}{white}{russische Puppe}~\includegraphics[width=0.15\textwidth]{matroschka.jpg}
+\vspace{1em}
+
+\mycommand{<key>value</key>}{XML als key-value-Notation} 
+
+Schachtelung \sep genau 1 Wurzelelement (eine äußerste Puppe)
+
+
+\bg{w3schools}{white}{Regeln}~ 
+Start- und End-Tag \sep Tagnamen case-sensitive \sep leere Elemente erlaubt (\& abkürzbar) \sep ordnungsgemäße hierarchische Schachtelung unter Wurzelknoten
+
+\end{frame}
+
+
+\begin{mybiggerxml}{Minimalbeispiel}
+<?xml version="1.0" ?>
+<root>
+<element attribute="value">
+content
+</element>
+<!-- comment -->
+</root>
+\end{mybiggerxml}
+
+%-----------------------------------
+\begin{frame}[fragile,allowframebreaks]{Praktische Tipps}
+\footnotesize
+\bg{w3schools}{white}{Von .docx zu TEI}~ 
+Worddokumente (.docx) sind XML-basiert und können, z.B. mithilfe von Pandoc oder OxGarage in einen gewünschten XML-Output umgewandelt werden.
+ z.B.~ \href{https://pandoc.org/}{Pandoc} oder \href{http://oxgarage.tei-c.org/#}{OxGarage} (TEI-Fokus)
+Mithilfe von XSLT-Transformationen kann man dieses ``Roh-XML'' dann noch anpassen. \\
+\smallskip
+
+\bg{w3schools}{white}{Formatvorlagen}~ 
+Kursiv, Superskript, fett, etc. geht automatisch, der Rest muss extra angelegt werden. (Formatvorlage = .dotx-Datei aus einem Beispiel-Doc, wo alle Elemente vorkommen, erstellen. Um ein neues Dokument daraus zu erstellen: .dotx klicken). \\
+\mycommand{<p rend="lat. Zitat">dixit [...]</p>}{Absatz-Formatvorlagen}
+\mycommand{<hi rend="italic">kursiver Text</hi>}{Zeichen-Formatvorlagen}
+\normalsize
+\end{frame}
+
+
+
+\begin{myxml}{`Roh-XML' aus Word mit Formatvorlagen}
+<?xml version="1.0"?>
+<xml>
+    <p rend="la::Dichtung">
+        <hi rend="la::Struktur-Heading">Schluss;;Epimythion::11</hi></p>
+    <p rend="la::Dichtung">
+        <hi rend="metrAnalyse">#senar::u-|u-|u//-|u/-|u-|ux</hi>
+        sic totam praedam sola improbitas
+        <note place="foot" xml:id="ftn15" n="15">
+            <p rend="footnote text">
+                Vokabel::improbitas,-atis f.: Schlechtigkeit (siehe auch. improbus)
+            </p>
+        </note>
+        abstulit. 
+    </p>
+    <p rend="de">
+        <hi rend="de::Title">Die Kuh, die Ziege, das Schaf und der Löwe</hi>
+    </p>
+</xml>
+\end{myxml}
+
+
+\section{Text Encoding Initiative}
+%-----------------------------------------------------
+\begin{frame}[fragile,allowframebreaks]{TEI Primer}
+\footnotesize
+\bg{alert}{white}{Text Encoding Initiative}\\
+\bgupper{w3schools}{black}{.xml}\\
+XML-Standard \sep De-Facto-Standard in den \emph{Digital Humanities} \sep Kodierung von Druckwerken (Editionswissenschaft) \sep bishin zu Linguistik
+\begin{quote}
+    Die Text Encoding Initiative (TEI) ist eine 1987 gegründete Organisation (seit 2000 als TEI-Konsortium organisiert) und ein gleichnamiges Dokumentenformat zur Kodierung und zum Austausch von Texten, das diese entwickelt hat und weiterentwickelt.  (\href{https://de.wikipedia.org/wiki/Text_Encoding_Initiative}{Wiki})
+\end{quote}
+
+\begin{myxml}{TEI-Grundstruktur}
+<TEI> <!-- Wurzelelement -->
+    <teiHeader> ... </teiHeader> <!-- Autor, Titel, Datierung, Quelle(n), Editionsrichtlinien,
+Versionierung, etc. -->
+    <text> ... </text>
+</TEI>
+\end{myxml}
+\smallskip
+
+\bg{w3schools}{white}{Ressourcen}\\
+\href{http://www.tei-c.org/Support/Learn/}{Learn TEI} \sep \href{http://www.tei-c.org/support/learn/teach-yourself-tei/}{Teach Yourself} \sep P5 = 5. Proposal \sep MEI für Musik \sep CEI für Charters (Urkunden) \sep \href{http://www.tei-c.org/}{http://www.tei-c.org/} \sep Standard zur Textkodierung \sep Publikationswerkzeuge: Versioning Machine, TEI Boilerplate, TEICHI, TEI
+Stylesheets 
+\end{frame}
+
+%-------------------------------------
+\begin{frame}[fragile,allowframebreaks]{TEI Header}
+\footnotesize
+\bg{alert}{white}{fileDesc}~ = Instrumentarium zur umfassenden bibliographischen  Beschreibung der Inhalte eines TEI-Dokumentes  \\
+\bg{alert}{white}{encodingDesc}~ = beschreibt den Zusammenhang des elektronischen Textes mit
+dem Quelltext, z.B. diverse Regel bei der Transkription, sowie Erläuterungen zum
+Annotationsprozess \\
+
+\begin{myxml}{TEI-Header}
+<TEI> <!-- Wurzelelement -->
+    <teiHeader>
+        <fileDesc> ... </fileDesc> <!-- obligatorisch --> 
+        <encodingDesc> <!-- optional -->
+        <profileDesc> <!-- optional -->
+        <revisionDesc> <!-- optional -->
+    </teiHeader> 
+    <text> ... </text>
+</TEI>
+\end{myxml} 
+\bg{alert}{white}{profileDesc}~ = Beschreibung aller nicht bibliographischen Aspekte des
+Textes, z.B. Informationen über die Entstehung des Textes, sowie über verwendete Sprachen
+u.Ä. \\
+\bg{alert}{white}{revisionDesc}~ = Beschreibung aller Änderungen und Überarbeitungsschritte am
+Transskript des Quelltextes.
+\end{frame}
+%----------------------------------
+\begin{frame}[allowframebreaks]{TEI Basics}
+\footnotesize
+TEI = \bg{alert}{white}{modular} $\to$ im Schema können Untermengen festgelegt werden (`Ich benutze Core und \dots ') \sep \href{http://www.tei-c.org/Roma/}{ROMA Schema} \sep sonst TEI P5 All
+\smallskip
+
+\bg{w3schools}{white}{Gemeinsamkeiten von Textdokumenten: } \\
+\bg{alert}{white}{\href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html}{TEI Core} }
+
+\begin{itemize}\footnotesize
+    \item Identifikatoren (Seitenangaben, Signatur, Inventarnummer, Regalnummer, etc.)
+    \item Abschnitte und Unterabschnitte (Gliederung)
+    \item Abbildungen, Skizzen, grafische Elemente
+    \item Schreibmodus (Prosa, Drama, Vers etc.)
+    \item Strukturelle Einheiten (Absatz, Listen, Strophen, Zeilen, Reden, etc.)
+    \item Textunterschiede oftmals durch unterschiedliche Formatierung gekennzeichnet (Titel, Überschriften, Zitate, Betonungen, etc.)
+    \item Sachinformationen (Personen, Orte, etc.)
+    \item Texteingriffe Korrekturen, Streichungen, Revisionen
+\end{itemize}
+\vspace{1em}
+
+\bg{w3schools}{white}{Warum TEI verwenden oder nicht?} \\
+\textbf{Nachteil:} man muss Regeln befolgen -- muss man aber sonst sinnvollerweise eh auch. Wollte man es wirklich gut machen, wäre es viel Arbeit! Andererseits: Flexibilität. TEI hat nicht immer etwas für Spezialzwecke. \\
+\textbf{Vorteil:} die Regeln hat sich schon jemand überlegt, man muss sie nur nachschauen, verstehen und anwenden. Allgemeiner Standard in den Geisteswissenschaften, macht Daten unterschiedlicher Projekte interoperabel.
+\end{frame}
+
+
+%-----------------------------------
+\begin{frame}[fragile,allowframebreaks]{TEI verwenden}
+\footnotesize
+\href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SG.html}{Gentle Intro to XML}
+
+\bg{alert}{white}{TEI Core}~ \textbf{div} (Abschnitt) \sep \textbf{p} (Paragraph) \sep \textbf{head} (Überschrift) \sep \textbf{lb} (linebreak) \sep \textbf{pb} (page break / beginning) \sep \textbf{hi} (highlight) \sep \textbf{l} (line) \sep \textbf{lg} (line group) \sep \textbf{list} \sep \textbf{item} \sep \textbf{listBibl} \sep \textbf{bibl} (bibliograph. Angabe)
+
+\bg{alert}{white}{Attribute}~ \textbf{@n} (label) \sep \textbf{@type} (Typisierung) \sep \textbf{xml:id} (eindeutige Kennung) \sep \textbf{xml:lang} (Sprache) \sep \textbf{@rend} (Darstellung) \sep \text{@ana} (Interpretation)
+
+\begin{myxml}{Typische Anwendungen}
+<foreign xml:lang="en">word</foreign>
+<term type="homonym"/>
+<date when="2009-04-27"/>
+<time when="12:00:00"/>
+<name type="person"/>
+<persName n="Caesar" xml:id="#44BC">Caesaris</persName> <!-- oder -->
+<persName key="ID.01.208"/>
+<person/>
+<emph/> <hi rend="italic">kursiver Text</hi>
+<seg/> <abbr type="acronym"/>
+<placeName xml:id="#Whitby">Abbey</placeName>
+\end{myxml}
+
+\bg{alert}{white}{Namensräume}~ Identifikation über URI \sep \bg{w3schools}{white}{<präfix:name>}~ \sep z.B. <tei:p> (`Ich meine das <p> nach dem TEI-Standard'). \\
+\bg{alert}{white}{Deklaration}~ <element xmlns=“URI“> \dots \\
+<präfix:element xmlns:präfix=“URI“> \dots \\
+Z.B. <tei:p xmlns:tei=“http://www.tei-c.org/ns/1.0“>...
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile,allowframebreaks]{Spezialfälle: Rede \& Briefe}
+\footnotesize
+Kodierung von Sprechakten  (\href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/examples-sp.html}{TEI-Referenz}), falls Speaker davor steht, sonst \href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/examples-said.html}{TEIs `said'}:
+\begin{verbatim}
+<sp who="#person">
+    <speaker>1.</speaker> <p>Bla, bla, bla.</p>
+</sp>
+
+<said who="#Adolphe">- Alors, Albert, quoi de neuf?</said>
+\end{verbatim}
+
+\begin{myxml}{Briefe in TEI \href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/DS.html#DSOC}{(Referenz)}}
+<div type="letter" n="14">
+    <head>Letter XIV: Miss Clarissa Harlowe to Miss Howe</head>
+        <opener>
+            <dateline>Thursday evening, March 2.</dateline>
+            <salute>Hallo,</salute>
+        </opener>
+    <p>On Hannah's depositing my long letter ...</p>
+    <closer>
+        <salute>Yours more than my own,</salute>
+        <signed>Clarissa Harlowe</signed>
+    </closer>
+</div>
+\end{myxml}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Annotation fortgeschritten}
+\footnotesize
+\bg{w3schools}{white}{\emph{Named Entities} \& Indirekte Referenz}\\
+\href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html}{TEI 13: Names, Dates, People, Places} \sep 
+\textbf{persName} für Namensnennung, \textbf{<rs>} für \emph{referring string} bei indirekter Nennung (`er', `der Herr', etc.). Hier dann mit \textbf{@key} oder \textbf{@ref} spezifizieren, wer gemeint ist. (\href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CONARS}{Referenz}). \textbf{forename} \sep \textbf{surname} \seo \textbf{roleName} (z.B. `König') \sep  \textbf{genName} (`der Ältere') \sep \textbf{addName} \sep \textbf{nameLink} (`von').
+
+\begin{verbatim}
+<name role="writer" type="person"
+ref="http://d-nb.info/gnd/118540238">
+Goethe</name>
+<person>
+  <addName type="Former">Murray</addName>
+  <forename>Wilhelmina</forename>
+  <addName type="nickname">Mina</addName>
+</person
+\end{verbatim}
+
+Eine \textbf{person} (selbst) ist nicht identisch mit dem \textbf{persName} (Name)! Dafür zur Verfügung stehende Elemente: \textbf{persName} zu \textbf{person}, \textbf{orgName} für \textbf{org} (Organisation), \textbf{placeName} für \textbf{place.} \textbf{geogName} (= geographical) = Lanschaftsmarker, Berge, etc.
+Problem: \textbf{Unterscheidliche Namensformen}, daher:
+\bg{w3schools}{white}{Normalisierung:} Zeigen, dass \emph{dieselbe} Person gemeint ist. Wir können also eine sog. `normalisierte' Form angeben, z.B. in Form einer Referenz auf die Personenliste im TEI-Header, auf deren \textbf{@xml:id} wir per \textbf{@ref} verweisen. Oder Normdaten der GND oder in Attribut (z.B. \textbf{@n} (\emph{label}) oder \textbf{@ana} (Interpretation)). 
+
+\bg{w3schools}{white}{Redundanz ist eine Fehlerquelle} $\to$ Referenz auf eindeutigen Ort, wo die Info genau 1x vorhanden ist $\to$ Bei Fehlern nur 1x ausgebessern, nicht 200 Okkurenzen. Zur eindeutigen Referenzierung xml:ids, z.B. \verb|<person xml:id="Mina">Mina</person>|, darauf refernzieren dann mithilfe des \texttt{@ref}-Attributs und einem Hashtag: \verb|<persName ref="#Mina">Mina</persName>|.
+
+\end{frame}
+
+
+%---------------------------------------------
+\section{Annotationspraxis}
+\begin{frame}[allowframebreaks]{Hands-On gezielte Annotation}
+\bg{alert}{white}{= Annotation mit dem Ziel der Erschließung}\\ 
+\bg{w3schools}{white}{Vorgehensweise}
+\smallskip 
+
+ \footnotesize
+\begin{enumerate}
+    \item Forschungsfrage formulieren
+    \item Überlegen, welche Daten zur Beantwortung benötigt werden
+    \item Begründen, warum und wie diese Daten zur Beantwortung beitragen
+    \item gezielt zu erschließende Quelle / Objekt (kann auch ein Gegenstand sein!) annotieren
+\end{enumerate}
+
+Dazu ist (wahrscheinlich) \bg{alert}{white}{Vorbereitung} notwendig:\\[0.5em]
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Beschaffung der Daten}
+
+\begin{enumerate}
+    \item Woher kann ich die Daten bekommen? 
+    \item Online in welcher Form (xml, html, txt, etc.) verfügbar?
+    \item Falls ja: darf ich die Daten (für meine Zwecke) überhaupt verwenden? (Urheberrecht, Creative Commons, etc.)
+    \item selbst digitalisieren / transkribieren
+    \item gezielt zu erschließende Quelle / Objekt (kann auch ein Gegenstand sein!) annotieren
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Sog. Pre-Processing}
+
+ Kann je nach Daten und Bedürfnisse ganz unterschiedlich aussehen. \\
+ 
+\begin{enumerate}
+    \item `Junk' / `Noise', der entfernt werden soll? (Zeichen aus dem HTML, kaputtes Encoding, irrelevante Daten, etc.)
+    \item Basis-Kodierung könnte man unter Pre-Processing fassen (Überschriften, Absätze)
+    \item Können Tätigkeiten automatisiert werden? Gibt es die Ressource schon online im richtigen Format?
+    \item Aber Achtung, übermotiviertes Automatisieren kann in Mehrarbeit enden!
+    \item Überprüfen, ob die `Vereinfachung' tatsächlich das gewünschte Ergebnis erzielt!
+    \item Falls Online-Markup nicht passt: Evtl. ist es mit einem plain text Dokument im Endeffekt schneller. 
+    \item Advanced: Automatisierung / Pre-Processing mit Python, XSLT, etc.
+\end{enumerate}
+
+\end{frame}
+%----------------------------------
+
+\begin{frame}[allowframebreaks]{Annotation leichter machen}
+\footnotesize
+\begin{enumerate}
+    \item beim Annotieren nicht `lesen', für das Grobe nur überfliegen
+    \item erst das Grobe (ohne zu lesen), dann eine 2. Runde für Details (\emph{Named Entities}, etc.)
+    \item Keyboard-Shortcuts nutzen: per Tastatur navigieren lernen statt `herumklicken'
+    \item Suchen \& Ersetzen für häufige Orte / Namen
+    \item Patterns automatisch finden (RegEx, Suchen/Ersetzen)
+    \item vielleicht gibt es die Daten schon online??
+\end{enumerate}
+\smallskip
+
+Wir könnten alles in Word mit Formatvorlagen annotieren und per OxGarage umwandeln. Allerdings muss dort (bis auf Absätze) alles händisch markiert werden. Suchen \& Ersetzen wäre da wohl effizienter.
+
+\begin{enumerate}
+    \item \textbf{Basiskodierung I:} Daten aus Wikisource rauskopieren in Word. Alles markieren (Strg+A) und auf Formatvorlage `Standard' klicken. Testen, ob es wirklich übernommen wurde. Im Word dann mit ``Überschrift''-Formatvorlage die Kapitelüberschriften markieren. Würde auch mit Markdown schnell gehen. 
+    (z.B. jedes `Chapter' durch `\# Chapter' ersetzen $\to$ in OxGarage zu TEI machen lassen, dann sind die \textbf{heads} schon drin (Achtung, dazu muss man das \texttt{.txt} in eine \texttt{.md}-Endung umbenennen, sonst wird es nicht akzeptiert.
+    \item \textbf{Transformation zu XML} / TEI mithilfe von \href{http://oxgarage.tei-c.org/#}{OxGarage}.
+    \item \textbf{Tipp:} Wenn ein Schema (z.B. TEI) mit dem Dokument verbunden ist, einfach öffnende Spitzklammer an eine Stelle schreiben und Oxygen bietet an, was dort stehen könnte (z.B. beim Header nützlich). Geht auch für Attribute, aber geht natürlich nur, wenn man mit dem Internet verbunden ist. Wenn man z.B. <p schreibt, dann zeigt es alle hier möglichen Elementnamen beginnend mit p, falls man schon ungefähr weiß, dass man z.B. eine Person sucht, die so benannt sein könnte.
+    \item \textbf{Suchen \& Ersetzen nutzen,} um häufige Orte und Personennamen `mit einem Schlag' zu annotieren. Sicherstellen, dass man nicht Dinge markiert, die keine eigentlichen Treffer waren (\emph{false positives}): Zunächst ein paar Ergebnisse durchklicken, bevor man `Alles ersetzen' macht. Vor Namen sicherheitshalber ein Leerzeichen setzen, damit nicht gleiche Wortteile mitgenommen werden (z.B. bei Mina durchaus möglich). Wenn Leute mit Vor- und Nachnamen vorkommen, immer zuerst die längstmögliche Version suchen, dann z.B. auch den Vornamen ohne Nachnamen. Allgemein, auch wenn man Suchen \& Ersetzen zum Bereinigen unerwünschter Attribute verwendet, immer zuerst das längstmögliche, dann die kürzeren Varianten. Beim `Bereinigen' schauen, ob man die unerwünschten Attribute nicht eh vielleicht brauchen kann (\emph{<hi style="bold">} könnte z.B. \emph{<hi rend="Name">} werden). (Für RegEx-Experten: XSLT / oXygen unterstützt nicht alle RegEx, die ihr evtl. aus anderen Programmiersprachen kennt -- hier sorgfältig googeln: Falls es den Eindruck macht, dass der gewünschte Ausdruck nicht explizit irgendwo als XSLT-tauglich ausgewiesen wird, davon ausgehen, dass es ihn nicht gibt. Mangelnde Bereitschaft zur Akzeptanz dieses Umstands kann in stundenlanger erfolgloser Fehlersuche enden \faSmileO )
+    \item Text durchgehen auf \emph{Named Entities} (Namen, Orte), die nicht automatisch gefunden wurden. Per Hand nachziehen.
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]{Vorgehensweise zur Basiskodierung}
+\footnotesize
+\begin{enumerate}
+    \item Annotation mit Word-Formatvorlagen und OxGarage-Konversion
+    \item XML selbst schreiben mit Tastatur-Shortcuts
+    \item im Internet vor-kodierten Text suchen / aus XHTML transformieren, etc. (funktionierte hier nicht so gut)
+\end{enumerate}
+\smallskip
+
+\bg{alert}{white}{Dateien}~sinnvolle, aussagekräftige Dateinamen. Keine Leerzeichen in Dateinamen, keine Umlaute. Möglichst plattformunabhängige Dateiformate wählen.
+
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Basis-Kodierung}
+
+\begin{enumerate}
+    \item \textbf{Überschriften} (\emph{head}) und \textbf{Paragraphen} (\emph{p})
+    \item händisch erstellter, \textbf{minimaler TEI-Header}
+    \item \textbf{Personennamen, Orte} (mindestens direkte Verwendung, Verweise wie `er' optional)
+    \item \textbf{direkte Reden mit eindeutigem Attribut} (\emph{listPerson} im \emph{teiHeader}), das angibt, wer hier spricht
+    \item \textbf{Briefe} (ganzer Brief, als Unter-Verschachtelung: Absender, Empfänger, Ort, Datum nach TEI)
+\end{enumerate}
+
+\bg{alert}{white}{TEI-Header}
+\begin{enumerate}
+    \item \textbf{fileDesc} ist verpflichtend, hier einfach die Autorschaft (ihr selbst und z.B. Bram Stoker) klarstellen und ggf. erklären
+    \item dann in der \textbf{profileDesc}: \textbf{listPerson} $\to$ \textbf{person} (mit Attribut xml:id="Mina" oder so)  $\to$ persName, evtl mit Untergliederung darunter nochmals in Vor-, Nach- und Spitzname. Für alle Hauptfiguren. TEI-Konventionen: \href{http://www.tei-c.org/release/doc/tei-p5-doc/de/html/examples-addName.html}{addName} type="nick" für Spitznamen, \textbf{roleName} für Graf, Doktor etc.
+    \item im Text Personen dann mit \texttt{<persName ref="#Mina">} referenzieren (selbes entsprechend bei Orten)
+    \item Liste der wichtigsten Orte: \textbf{profileDesc} $\to$ \textbf{settingDesc} $\to$ \textbf{listPlace}: \texttt{<place xml:id="London"  ana="http://www.geonames.org/2643741/"> <placeName> London} etc.
+    \item im Text: \texttt{<placeName ref="#London">London</placeName>}
+\end{enumerate}
+
+\end{frame}
+
+%-----------------------------------------------------
+%
+
+
+\begin{frame}[standout]
+  \alert{Und Action!} \normalsize
+ Erstellt einen TEI-Header für Euer Dokument.
+\end{frame}
+
+
+%---------------------------------------------
+\begin{multibox}{2} % Anzahl der Boxen in einer Reihe angeben
+\begin{subbox}{subbox}{Tastatur-Shortcuts}\footnotesize
+
+\mycommand{STRG+C}{copy}
+\mycommand{STRG+Z}{undo}
+\mycommand{STRG+Y}{redo}
+\mycommand{STRG+A}{alles}
+\mycommand{STRG+S}{save}
+
+\mycommand{Alt+Tab}{zw. Anwendungen springen}
+\mycommand{Strg+Tab}{zw. Tabs springen}
+\mycommand{F5}{Browser-Refresh}
+
+\end{subbox}
+\begin{subbox}{customcolor}{Tastatur-Shortcuts}\footnotesize
+
+\mycommand{STRG+Pfeiltasten}{in Sprüngen navigieren}
+\mycommand{STRG+SHIFT+Pfeiltasten}{in Sprüngen markieren)}
+\mycommand{STRG+SHIFT+e}{Element (<oXygen/>)}
+
+\end{subbox}
+\end{multibox}
+
+\begin{frame}[fragile,allowframebreaks]{RegEx}
+\footnotesize
+
+\href{http://regexr.com}{RegExr.com}: vorher testen (potentielle Probleme z.B. = entweder alles oder nichts finden).
+Auch ein RegEx ist ein Modell $\to$ Abstraktion. z.B. \textbf{Jahreszahl finden} \verb|\d{4}|
+\smallskip
+
+\textbf{Ein Wort finden, das auch als Wortteil woanders vorkommen kann}, z.B. `bat': Suche von \verb|bat(\W)|. D.h. die Zeichenkette beginnt mit `bat' und es folgt ein Nicht-Wortzeiten (also Space, Punkt, Komma, Hyphen, etc.). \verb|\w| gibt ein `Wortzeichen', also Buchstaben, der Ausdruck in Groß jeweils das Gegenteil -- also alles, was durch \verb|\w| \emph{nicht} erfasst wird.
+Das ganze kann man natürlich auch an den Wortanfang noch setzen, um auf Nummer sicher zu gehen: \verb|(\W)bat(\W)|
+\smallskip
+
+Reguläre Ausdrücke (Regular Expressions, Regex) = Muster, die Zeichenketten beschreiben. 
+$\to$ Finden und Bearbeiten von Zeichenfolgen, die auf sie zutreffen.
+
+\begin{multibox}{2} % Anzahl der Boxen in einer Reihe angeben
+\begin{subbox}{subbox}{nachgestellt}\footnotesize
+
+\mycommand{nichts}{genau 1x}
+\mycommand{?}{1x oder kein Mal}
+\mycommand{*}{beliebig oft}
+\mycommand{+}{mind. 1x}
+\mycommand{{n}}{n-mal}
+
+\end{subbox}
+\begin{subbox}{customcolor}{Auswahl}\footnotesize
+
+\mycommand{.}{beliebiges Zeichen}
+
+\mycommand{[abc]}{Zeichenauswahl}
+\mycommand{[a-z][0-9]}{Auswahl}
+\mycommand{\n}{Zeilenumbruch}
+
+\end{subbox}
+\end{multibox}
+
+%---------------------------------------------
+\begin{multibox}{2} % Anzahl der Boxen in einer Reihe angeben
+\begin{subbox}{subbox}{Gruppieren}\footnotesize
+
+\mycommand{()}{zur Gruppierung und Anwahl (\$1)}
+\mycommand{(.*?)}{beliebig (non-greedy)}
+
+
+\mycommand{^}{negiert Folgendes}
+\mycommand{^}{Start eines Strings}
+\mycommand{\$}{String-Ende}
+\mycommand{\\}{Escape-Sequenz}
+\mycommand{|}{Oder-Pipe}
+\end{subbox}
+\begin{subbox}{subbox}{RegEx}\footnotesize
+\mycommand{\s}{\emph{space}: Leerzeichen, Tab, Zeilenumbruch}
+\mycommand{\d}{Zahl (\emph{digit}}
+\mycommand{\w}{Wort (=Buchst.,Zahl, Unterstrich}
+\mycommand{\D \W \S}{jeweils das Gegenteil wie in klein}
+
+\end{subbox}
+\end{multibox}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile,allowframebreaks]{Reguläre Ausdrücke (RegEX)}
+\footnotesize
+\bg{w3schools}{white}{Vorbereiten}\\
+Als erstes: Ein Leerzeichen markieren und durch ein Leerzeichen ersetzen. Dies verhindert Encoding-Probleme (z.B. Windows hat `geschützte Leerzeichen', die im Hintergrund für den Computer anders aussehen. Diese können unerklärliche Fehler verursachen, daher lieber gleich am Anfang präventiv erledigen und die Fehlerquelle damit ausschließen.
+\medskip
+
+
+\bg{w3schools}{white}{Personen und Orte}\\
+\textbf{Suchen und Ersetzen in Oxygen:} Im OxygenXML-Suchfeld `Reguläre Ausdrücke' und alles drunter anklicken.
+
+Im oberen Suche-Feld:
+\begin{verbatim}
+    ( Mina|Mina Murray|Mina Harker)
+\end{verbatim}
+
+Im Ersetzen-Feld greifen wir auf die Inhalte aus der Klammer folgendermaßen zu (mit \$, das durchnummeriert wird, denn man kann mehrere Ausdrücke klammern und somit unterschiedlich weriterverarbeiten (z.B. Vor- und Nachname bereits richtig kodieren mit (Mina)(Murray|Harker), der Vorname ist dann in \$1, der Nachname in \$2 wiederzufinden):
+\begin{verbatim}
+    <persName ref="#Mina">$1</persName>
+\end{verbatim}
+
+Selbes für Ort:
+\begin{verbatim}
+    <placeName ref="#London">$1</placeName>
+\end{verbatim}
+
+Hier nicht vergessen, dass im Text immer vor der id der \# sein muss, sonst kommt vom TEI-Schema ein Fehler gemeldet.
+
+\medskip
+
+\bg{w3schools}{white}{Kapitelstruktur}\\
+Im oberen Suche-Feld:
+\begin{verbatim}
+    <p>(Letter|Chapter) (.*?)</p>
+\end{verbatim}
+
+Im Ersetzen-Feld greifen wir auf die Inhalte aus der Klammer folgendermaßen zu (mit \$):
+\begin{verbatim}
+    <head>$1 $2</head>
+\end{verbatim}
+
+Hinterher muss man um die heads (also immer beginnend vor head markieren bis kurz vor dem folgenden head, d.h. Ende Kapitel) markieren, Strg+E und ein div-Element erstellen für jedes Kapitel. Sonst nicht TEI-konform (gäbe auch komplexe Abfragen, mit denen dies automatisiert werden könnte).
+\medskip
+
+\bg{w3schools}{white}{Unerwünschte Zeilenumbrüche loswerden}\\
+Z.B. bei den Projekt-Gutenberg-txt-Dateien ist es uns passiert, dass unerwünschte Zeilenumbrüche im Text waren, die ohne RegEx nicht so einfach zu entfernen waren. Der RegEx, der das Problem löst, schaut folgendermaßen aus:
+\begin{verbatim}
+    (\w+)(\n)(\w+)
+\end{verbatim}
+D.h. er sucht ein oder mehrere Wörter, wo genau 1 Zeilenumbrucht (\textbackslash n = newline) dazwischen steht. Die Logik dahinter: richtige Absätze werden durch mehrere Zeilenumbrüche abgebildet (bei einer Leerzeile zw. zwei Abschnitten finden sich mind. 2 newline-Zeichen, also 1x am Ende der letzten Zeile und 1x nach der Leerzeile, dort sind aber keine Wort-Zeichen dazwischen. Wir löschen also tatsächlich nur unerwünschte / überflüssige  Umbrüche. Hier aber auch sichergehen, dass der Text tatsächlich so `funktioniert' -- wenn keine Leerzeilen zwischen Abschnitten sind, so funktioniert das nicht!
+
+\end{frame}
+%---------------------------------------------------
+
+
+
+\begin{frame}[allowframebreaks]{Literatur}
+
+\AtNextBibliography{\footnotesize}
+\printbibliography  
+\end{frame}
