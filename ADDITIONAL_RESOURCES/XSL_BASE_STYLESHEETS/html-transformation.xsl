@@ -21,7 +21,7 @@
                     <h3>Wie oft kommt ein Name im Text vor?</h3>
                     <ul>
                         <xsl:for-each select="//t:person">
-                            <xsl:variable name="currentPersonsXMLID" select="concat('#', child::t:persName/@xml:id)"/>
+                            <xsl:variable name="currentPersonsXMLID" select="concat('#', t:persName/@xml:id)"/>
                             <xsl:variable name="count" select="count(//t:persName[@ref = $currentPersonsXMLID])"/>
                             
                             
