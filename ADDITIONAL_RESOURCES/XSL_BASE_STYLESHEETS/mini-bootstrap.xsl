@@ -34,6 +34,9 @@
                 
                                         <!-- Javascript Toggle -->
                                         <!-- Roman Bleiers Simple Checkbox Menu -->
+                                        <!-- if the "this is a test popup annoys you, please delete the line alert('This is a test');
+                                             however, please note that this is a good way of checking whether javascript works,
+                                             to check if the below Simple Checkbox Wippet works. You might need it again. -->
                                         <script>
                                             alert('This is a test');
                                             (function ( $ ) {
@@ -164,6 +167,8 @@
             <a style="text-decoration:none;color: inherit;" href="#" data-toggle="tooltip">
                 <xsl:attribute name="title">
                     <xsl:for-each select="//t:persName[ancestor::t:teiHeader][@xml:id=$normalized-person]">
+                        <!-- instead of persname[ancestor::t:teiHeader] you can also use //t:teiHeader//t:persName
+                             which might perform faster in long documents -->
                         <xsl:apply-templates/>
                     </xsl:for-each>
                 </xsl:attribute>
